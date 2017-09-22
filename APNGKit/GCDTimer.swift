@@ -60,8 +60,7 @@ open class GCDTimer {
         set {
             event = newValue
             
-            let time = DispatchTimeInterval.milliseconds(Int(interval * 1000.0))
-            self.timerSource.scheduleRepeating(deadline: DispatchTime.now(), interval: time)
+            self.timerSource.scheduleRepeating(deadline: DispatchTime.now(), interval: DispatchTimeInterval.seconds(Int(interval)))
             self.timerSource.setEventHandler { [weak self] in
                 self?.event()
             }
@@ -112,3 +111,4 @@ open class GCDTimer {
         queue.asyncAfter(deadline: delayTime, execute: block)
     }
 }
+
